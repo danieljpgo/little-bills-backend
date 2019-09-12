@@ -57,7 +57,7 @@ router.get('/:id',
  * @apiParam {String{6..}} password User's password.
  * @apiParam {String} [name] User's name.
  * @apiParam {String} [picture] User's picture.
- * @apiParam {String=user,admin} [role=user] User's role.
+ * @apiParam {String=user} [role=user] User's role.
  * @apiSuccess (Sucess 201) {Object} user User's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 401 Master access only.
@@ -105,14 +105,14 @@ router.put('/:id/password',
  * @api {delete} /users/:id Delete user
  * @apiName DeleteUser
  * @apiGroup User
- * @apiPermission admin
+ * @apiPermission user
  * @apiParam {String} access_token User access_token.
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 401 Admin access only.
  * @apiError 404 User not found.
  */
 router.delete('/:id',
-  token({ required: true, roles: ['admin'] }),
+  token({ required: true }),
   destroy)
 
 export default router
