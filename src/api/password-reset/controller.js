@@ -3,14 +3,15 @@ import { sendMail } from '../../services/sendgrid'
 import { PasswordReset } from '.'
 import { User } from '../user'
 
-export const create = ({ bodymen: { body: { email, link } } }, res, next) =>
+const linkPassword = 'teste'
+
+export const create = ({ bodymen: { body: { email } } }, res, next) =>
   User.findOne({ email })
-    .then(notFound(res))
     .then((user) => user ? PasswordReset.create({ user }) : null)
     .then((reset) => {
       if (!reset) return null
       const { user, token } = reset
-      link = `${link.replace(/\/$/, '')}/${token}`
+      const link = `${linkPassword.replace(/\/$/, '')}/${token}`
       const content = `
         Hey, ${user.name}.<br><br>
         You requested a new password for your backend-littlebills account.<br>

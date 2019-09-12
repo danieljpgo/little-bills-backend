@@ -48,7 +48,6 @@ export const update = ({ bodymen: { body }, params, user }, res, next) =>
     .then(notFound(res))
     .then((result) => {
       if (!result) return null
-      const isAdmin = user.role === 'admin'
       const isSelfUpdate = user.id === result.id
       if (!isSelfUpdate && !isAdmin) {
         res.status(401).json({
@@ -88,6 +87,19 @@ export const updatePassword = ({ bodymen: { body }, params, user }, res, next) =
 export const destroy = ({ params }, res, next) =>
   User.findById(params.id)
     .then(notFound(res))
+    .then((result) => {
+      if (!result) return null
+      const isSelfUpdate = user.id === result.id
+      if (!isSelfUpdate) {
+        res.status(401).json({
+          valid: false,
+          param: 'delete',
+          message: 'You can\'t delete other user\'s'
+        })
+        return null
+      }
+      return result
+    })
     .then((user) => user ? user.remove() : null)
     .then(success(res, 204))
     .catch(next)
