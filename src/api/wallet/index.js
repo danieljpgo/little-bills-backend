@@ -7,13 +7,13 @@ import { schema } from './model'
 export Wallet, { schema } from './model'
 
 const router = new Router()
-const { value } = schema.tree
+const { balance, name, description } = schema.tree
 
 let reqSchema = {
   user: {
     type: String
   }
-} 
+}
 
 /**
  * @api {post} /wallets Create wallet
@@ -30,7 +30,7 @@ let reqSchema = {
  */
 router.post('/',
   token({ required: true }),
-  body({ value }),
+  body({ balance, name, description }),
   create)
 
 /**
@@ -79,7 +79,7 @@ router.get('/:id',
  */
 router.put('/:id',
   token({ required: true }),
-  body({ value }),
+  body({ balance, name, description }),
   update)
 
 /**

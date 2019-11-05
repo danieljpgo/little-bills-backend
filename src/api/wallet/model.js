@@ -6,9 +6,16 @@ const walletSchema = new Schema({
     ref: 'User',
     required: true
   },
-  value: {
+  balance: {
     type: Number,
     required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String
   }
 }, {
   timestamps: true,
@@ -24,7 +31,9 @@ walletSchema.methods = {
       // simple view
       id: this.id,
       user: this.user.view(),
-      value: this.value,
+      balance: this.balance,
+      name: this.name,
+      description: this.description,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }
