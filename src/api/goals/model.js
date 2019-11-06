@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-const status = ['new', 'ongoing', 'done'] 
+const status = ['new', 'ongoing', 'done']
 
 const goalsSchema = new Schema({
   user: {
@@ -11,7 +11,7 @@ const goalsSchema = new Schema({
   startTime: {
     type: Date,
     required: true
-  },  
+  },
   endTime: {
     type: Date,
     required: true
@@ -28,7 +28,7 @@ const goalsSchema = new Schema({
     type: String,
     default: 'new',
     required: true,
-    enum: status 
+    enum: status
   }
 }, {
   timestamps: true,
