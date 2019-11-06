@@ -17,10 +17,12 @@ const transactionSchema = new Schema({
     required: true
   },
   value: {
-    type: String
+    type: Number,
+    required: true
   },
   description: {
-    type: String
+    type: String,
+    required: true
   }
 }, {
   timestamps: true,
