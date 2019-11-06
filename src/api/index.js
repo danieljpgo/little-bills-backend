@@ -5,6 +5,7 @@ import passwordReset from './password-reset'
 import wallet from './wallet'
 import goals from './goals'
 import category from './category'
+import transaction from './transaction'
 
 const router = new Router()
 
@@ -37,5 +38,6 @@ router.use('/password-resets', passwordReset)
 router.use('/wallets', wallet)
 router.use('/goals', goals)
 router.use('/categories', category)
+router.use('/transactions', transaction)
 
 export default router
