@@ -7,6 +7,18 @@ export const create = ({ user, bodymen: { body } }, res, next) =>
     .then(success(res, 201))
     .catch(next)
 
+export const createIncome = ({ user, bodymen: { body } }, res, next) =>
+  Transaction.create({ ...body, user })
+    .then((transaction) => transaction.view(true))
+    .then(success(res, 201))
+    .catch(next)
+
+export const createExpense = ({ user, bodymen: { body } }, res, next) =>
+  Transaction.create({ ...body, user })
+    .then((transaction) => transaction.view(true))
+    .then(success(res, 201))
+    .catch(next)
+
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Transaction.count(query)
     .then(count => Transaction.find(query, select, cursor)
