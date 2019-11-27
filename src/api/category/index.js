@@ -9,6 +9,13 @@ export Category, { schema } from './model'
 const router = new Router()
 const { name, type } = schema.tree
 
+let reqSchema = {
+  type: {
+    type: String,
+    enum: ['income', 'expense']
+  }
+}
+
 /**
  * @api {post} /categories Create category
  * @apiName CreateCategory
@@ -41,7 +48,7 @@ router.post('/',
  */
 router.get('/',
   token({ required: true }),
-  query(),
+  query(reqSchema),
   index)
 
 /**

@@ -1,4 +1,5 @@
 import { success, notFound } from '../../services/response/'
+import { Category } from '../category'
 import { Transaction } from '.'
 
 export const create = ({ user, bodymen: { body } }, res, next) =>
@@ -20,16 +21,16 @@ export const createExpense = ({ user, bodymen: { body } }, res, next) =>
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
-  Transaction.count(query)
-    .then(count => Transaction.find(query, select, cursor)
+  Category.find({ 'type': query.categoryType }, select, cursor)
+    .then((categories) => Transaction.find({ 'category': { $in: categories.map(category => category.id) } })
       .populate('user')
-      .populate('category')
       .populate('wallet')
-      .then((transactions) => ({
-        count,
-        rows: transactions.map((transaction) => transaction.view(true))
-      }))
+      .populate('category')
     )
+    .then((transactions) => ({
+      count: transactions.length,
+      rows: transactions.map((transaction) => transaction.view(true))
+    }))
     .then(success(res))
     .catch(next)
 

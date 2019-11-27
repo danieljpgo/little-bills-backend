@@ -9,6 +9,12 @@ export Transaction, { schema } from './model'
 const router = new Router()
 const { wallet, category, value, description } = schema.tree
 
+let reqSchema = {
+  'categoryType': {
+    type: String
+  }
+}
+
 /**
  * @api {post} /transactions Create transaction
  * @apiName CreateTransaction
@@ -69,7 +75,6 @@ router.post('/income',
   body({ wallet, category, value, description }),
   createIncome)
 
-
 /**
  * @api {get} /transactions Retrieve transactions
  * @apiName RetrieveTransactions
@@ -84,7 +89,7 @@ router.post('/income',
  */
 router.get('/',
   token({ required: true }),
-  query(),
+  query(reqSchema),
   index)
 
 /**
