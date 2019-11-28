@@ -10,10 +10,14 @@ const router = new Router()
 const { wallet, category, value, description } = schema.tree
 
 let reqSchema = {
-  'categoryType': {
+  categoryType: {
     type: String
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
   }
-}
+};
 
 /**
  * @api {post} /transactions Create transaction
