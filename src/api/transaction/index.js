@@ -5,6 +5,7 @@ import { token } from '../../services/passport'
 import { create, createExpense, createIncome, index, show } from './controller'
 import { schema } from './model'
 import { Schema } from "mongoose";
+export Transaction, { schema } from "./model";
 
 const router = new Router()
 const { wallet, category, value, description } = schema.tree
