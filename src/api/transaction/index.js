@@ -4,8 +4,8 @@ import { middleware as body } from 'bodymen'
 import { token } from '../../services/passport'
 import { create, createExpense, createIncome, index, show } from './controller'
 import { schema } from './model'
-import { Schema } from "mongoose";
-export Transaction, { schema } from "./model";
+import { Schema } from 'mongoose';
+export Transaction, { schema } from './model';
 
 const router = new Router()
 const { wallet, category, value, description } = schema.tree
@@ -18,7 +18,7 @@ let reqSchema = {
     type: Schema.ObjectId,
     ref: 'User'
   }
-};
+}
 
 /**
  * @api {post} /transactions Create transaction

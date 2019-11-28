@@ -5,7 +5,7 @@ const type = ['income', 'expense']
 const categorySchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   type: {
     type: String,
@@ -16,7 +16,7 @@ const categorySchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User',
     required: true
-  },
+  }
 }, {
   timestamps: true,
   toJSON: {
@@ -32,7 +32,7 @@ categorySchema.methods = {
       id: this.id,
       name: this.name,
       type: this.type,
-      user: this.user.view(full),
+      // user: this.user.view(full),
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }

@@ -6,24 +6,24 @@ import { Wallet } from '../wallet'
 export const create = ({ user, bodymen: { body } }, res, next) => {
   console.log(body.category)
   Category.findById(body.category)
-  .then((category) => {
-    Wallet.findById(body.wallet)
-      .then((wallet) => {
-        if (category.type === "income") {
-          wallet.balance = wallet.balance + body.value;
-          wallet.save();
-        } else {
-          wallet.balance = wallet.balance - body.value;
-           wallet.save();
-        }
-      })
-      .then(() => {
-        Transaction.create({ ...body, user })
-          .then(transaction => transaction.view(true))
-          .then(success(res, 201))
-          .catch(next);
-      });
-  })
+    .then((category) => {
+      Wallet.findById(body.wallet)
+        .then((wallet) => {
+          if (category.type === 'income') {
+            wallet.balance = wallet.balance + body.value
+            wallet.save()
+          } else {
+            wallet.balance = wallet.balance - body.value
+            wallet.save()
+          }
+        })
+        .then(() => {
+          Transaction.create({ ...body, user })
+            .then(transaction => transaction.view(true))
+            .then(success(res, 201))
+            .catch(next)
+        })
+    })
 }
 
 export const createIncome = ({ user, bodymen: { body } }, res, next) =>
@@ -39,18 +39,18 @@ export const createExpense = ({ user, bodymen: { body } }, res, next) =>
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
-  Category.find({ 'type': query.categoryType }, select, cursor)
+  Category.find({ 'type': query.categoryType, 'user': query.user }, select, cursor)
     .then((categories) => Transaction.find({ 'category': { $in: categories.map(category => category.id) } })
       .populate('user')
       .populate('wallet')
       .populate('category')
-  )
-      .then((transactions) => ({
-        count: transactions.length,
-        rows: transactions.map((transaction) => transaction.view(true))
-      }))
-      .then(success(res))
-      .catch(next)
+    )
+    .then((transactions) => ({
+      count: transactions.length,
+      rows: transactions.map((transaction) => transaction.view(true))
+    }))
+    .then(success(res))
+    .catch(next)
 
 export const show = ({ params }, res, next) =>
   Transaction.findById(params.id)
