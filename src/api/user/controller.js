@@ -27,10 +27,6 @@ export const showMe = ({ user }, res) =>
 export const create = ({ bodymen: { body } }, res, next) =>
   User.create(body)
     .then(user => {
-      Category.create({ name: "Roupas", type: "expense" })
-      Category.create({ name: "Material Escolar", type: "expense" })
-      Category.create({ name: "Salário", type: "income" })
-      Category.create({ name: "Mesada", type: "income" })
       sign(user.id)
         .then(token => ({ token, user: user.view(true) }))
         .then(success(res, 201));

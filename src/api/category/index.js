@@ -4,7 +4,7 @@ import { middleware as body } from 'bodymen'
 import { token } from '../../services/passport'
 import { create, index, show, update, destroy } from './controller'
 import { schema } from './model'
-export Category, { schema } from './model'
+import { Schema } from "mongoose";
 
 const router = new Router()
 const { name, type } = schema.tree
@@ -12,9 +12,13 @@ const { name, type } = schema.tree
 let reqSchema = {
   type: {
     type: String,
-    enum: ['income', 'expense']
+    enum: ["income", "expense"]
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: "User"
   }
-}
+};
 
 /**
  * @api {post} /categories Create category
