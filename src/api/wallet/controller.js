@@ -5,14 +5,14 @@ export const create = ({ user, bodymen: { body } }, res, next) =>
   Wallet.create({ ...body, user: user })
     .then(wallet => wallet.view(true))
     .then(success(res, 201))
-    .catch(next);
+    .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Wallet.find(query, select, cursor)
     .populate('create')
     .then(wallets => wallets.map(wallet => wallet.view()))
     .then(success(res))
-    .catch(next);
+    .catch(next)
 
 export const show = ({ params }, res, next) =>
   Wallet.findById(params.id)

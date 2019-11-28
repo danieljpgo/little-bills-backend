@@ -12,6 +12,11 @@ const categorySchema = new Schema({
     required: true,
     enum: type
   },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User',
+    required: true
+  },
 }, {
   timestamps: true,
   toJSON: {
@@ -27,6 +32,7 @@ categorySchema.methods = {
       id: this.id,
       name: this.name,
       type: this.type,
+      user: this.user.view(full),
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }

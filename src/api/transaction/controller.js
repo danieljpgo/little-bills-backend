@@ -44,13 +44,13 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
       .populate('user')
       .populate('wallet')
       .populate('category')
-    )
-    .then((transactions) => ({
-      count: transactions.length,
-      rows: transactions.map((transaction) => transaction.view(true))
-    }))
-    .then(success(res))
-    .catch(next)
+  )
+      .then((transactions) => ({
+        count: transactions.length,
+        rows: transactions.map((transaction) => transaction.view(true))
+      }))
+      .then(success(res))
+      .catch(next)
 
 export const show = ({ params }, res, next) =>
   Transaction.findById(params.id)

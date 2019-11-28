@@ -8,7 +8,7 @@ export Category, { schema } from "./model";
 import { Schema } from "mongoose";
 
 const router = new Router()
-const { name, type } = schema.tree
+const { name, type, user } = schema.tree
 
 let reqSchema = {
   type: {

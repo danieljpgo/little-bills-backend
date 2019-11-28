@@ -1,8 +1,8 @@
 import { success, notFound } from '../../services/response/'
 import { Category } from '.'
 
-export const create = ({ bodymen: { body } }, res, next) =>
-  Category.create(body)
+export const create = ({ user, bodymen: { body } }, res, next) =>
+  Category.create({ ...body, user: user })
     .then((category) => category.view(true))
     .then(success(res, 201))
     .catch(next)
