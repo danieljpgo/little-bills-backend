@@ -1,6 +1,7 @@
 import { success, notFound } from '../../services/response/'
 import { User } from '.'
 import { sign } from '../../services/jwt'
+import { Category } from '../category'
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   User.count(query)
@@ -26,22 +27,26 @@ export const showMe = ({ user }, res) =>
 export const create = ({ bodymen: { body } }, res, next) =>
   User.create(body)
     .then(user => {
+      Category.create({ name: "Roupas", type: "expense" })
+      Category.create({ name: "Material Escolar", type: "expense" })
+      Category.create({ name: "Salário", type: "income" })
+      Category.create({ name: "Mesada", type: "income" })
       sign(user.id)
-        .then((token) => ({ token, user: user.view(true) }))
-        .then(success(res, 201))
+        .then(token => ({ token, user: user.view(true) }))
+        .then(success(res, 201));
     })
-    .catch((err) => {
+    .catch(err => {
       /* istanbul ignore else */
-      if (err.name === 'MongoError' && err.code === 11000) {
+      if (err.name === "MongoError" && err.code === 11000) {
         res.status(409).json({
           valid: false,
-          param: 'email',
-          message: 'email already registered'
-        })
+          param: "email",
+          message: "email already registered"
+        });
       } else {
-        next(err)
+        next(err);
       }
-    })
+    });
 
 export const update = ({ bodymen: { body }, params, user }, res, next) =>
   User.findById(params.id === 'me' ? user.id : params.id)
