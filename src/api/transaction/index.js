@@ -4,7 +4,7 @@ import { middleware as body } from 'bodymen'
 import { token } from '../../services/passport'
 import { create, createExpense, createIncome, index, show } from './controller'
 import { schema } from './model'
-export Transaction, { schema } from './model'
+import { Schema } from "mongoose";
 
 const router = new Router()
 const { wallet, category, value, description } = schema.tree
