@@ -4,6 +4,7 @@ import { middleware as body } from 'bodymen'
 import { token } from '../../services/passport'
 import { create, index, show, update, destroy } from './controller'
 import { schema } from './model'
+export Category, { schema } from "./model";
 import { Schema } from "mongoose";
 
 const router = new Router()
