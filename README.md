@@ -20,16 +20,6 @@
       alt="languages"
       src="https://img.shields.io/github/languages/count/danieljpgo/little-bills-backend?color=EF937D&style=flat-square"
    />
-   <a href="https://github.com/danieljpgo/little-bills-backend/stargazers">
-      <img
-         alt="stars"
-         src="https://img.shields.io/github/stars/danieljpgo/little-bills-backend?color=EF937D&style=flat-square"/>
-   </a>
-   <a href="https://github.com/danieljpgo/little-bills-backend/network/members">
-      <img
-         alt="forks"
-         src="https://img.shields.io/github/forks/danieljpgo/little-bills-backend?color=EF937D&style=flat-square"/>
-   </a>
    <a href="https://github.com/danieljpgo/little-bills-backend/graphs/contributors">
       <img
          alt="contributors"
@@ -74,8 +64,11 @@ The main technologies used to develop the project were:
 - [Mongoose](https://mongoosejs.com/)
 - [Sendgrid](https://sendgrid.com/)
 
+This project was bootstrapped with:
+- [Rest](https://github.com/diegohaz/rest)
+
 ## :runner: Getting Started
-First, make sure you have **[Node](https://nodejs.org/en/)**, then clone the project with:
+First, make sure you have **[Node](https://nodejs.org/en/)** and **[Mongodb](https://docs.mongodb.com/manual/tutorial/)**, then clone the project with:
 ```
 git clone https://github.com/danieljpgo/little-bills-backend.git
 ```
@@ -84,7 +77,14 @@ With **[npm](https://nodejs.org/en/knowledge/getting-started/npm/what-is-npm/)**
 ```
 npm install
 ```
-... :construction: under construction
+In order to start the **datebase**, run:
+```
+sudo service mongod start
+```
+In order to **start** the application in a development environment, execute:
+```
+npm run dev
+```
 
 Any questions or problems access the links to the main technologies mentioned in <a href="#technologies">Technologies</a>.
 
