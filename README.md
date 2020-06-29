@@ -50,8 +50,7 @@ The main features of the project are:
 - **Sendgrid** recovery email
 - **CRUD** of goals to achieve.
 - **CRUD** of wallet to store money.
-- Control of **income** and **expense** transactions.
-
+- **Income** and **expense** transactions control.
 ## :computer: Integrations
 This project is part of the **Little Bills** system, the other projects are located at:
 - [Frontend Little Bills](https://github.com/vieirasolutions/front-littlebills)
